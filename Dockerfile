@@ -24,6 +24,9 @@ ENV PATH /usr/local/virtuoso-opensource/bin/:$PATH
 # Add Virtuoso config
 ADD virtuoso.ini /virtuoso.ini
 
+# Add dump_nquads_procedure
+ADD dump_nquads_procedure.sql /dump_nquads_procedure.sql
+
 # Add startup script
 ADD startup.sh /startup.sh
 
