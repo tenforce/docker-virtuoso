@@ -18,7 +18,21 @@ The `dba` password can be set at container start up via the `DBA_PASSWORD` envir
 Enter the Virtuoso docker, open ISQL and execute the `dump_nquads` procedure. The dump will be available in `/my/path/to/the/virtuoso/db/dumps`.
 
     docker exec -it my-virtuoso bash
-    isql -u dba -P $DBA_PASSWORD
-    dump_nquads ('dumps', 1, 10000000, 1);
+    isql-v -U dba -P $DBA_PASSWORD
+    SQL> dump_nquads ('dumps', 1, 10000000, 1);
 
 For more information, see http://virtuoso.openlinksw.com/dataspace/doc/dav/wiki/Main/VirtRDFDumpNQuad
+
+## Loading quads in Virtuoso
+Make the quad `.nq` files available in `/my/path/to/the/virtuoso/db/dumps`. The quad files might be compressed. Enter the Virtuoso docker, open ISQL, register and run the load.
+
+    docker exec -it my-virtuoso bash
+    isql-v -U dba -P $DBA_PASSWORD
+    SQL> ld_dir('dumps', '*.nq', 'http://foo.bar');
+    SQL> rdf_loader_run();
+
+Validate the `ll_state` of the load. If `ll_state` is 2, the load completed.
+ 
+    select * from DB.DBA.load_list;
+
+For more information, see http://virtuoso.openlinksw.com/dataspace/doc/dav/wiki/Main/VirtBulkRDFLoader
