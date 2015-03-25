@@ -1,16 +1,16 @@
 #!/bin/bash
 cd /var/lib/virtuoso/db
 
-mkdir dumps
+mkdir -p dumps
 
-mv /virtuoso.ini .
+mv /virtuoso.ini . 2>/dev/null
 
 if [ ! -f "/.dba_pwd_set" ];
 then
-  virtuoso-t +wait && echo "SET password dba $DBA_PASSWORD;" | isql -u dba -P dba && isql -u dba -P $DBA_PASSWORD < /dump_nquads_procedure.sql
+  virtuoso-t +wait && isql-v -U dba -P dba < /dump_nquads_procedure.sql && echo  "user_set_password('dba', '$DBA_PASSWORD');" | isql-v -U dba -P dba
+  kill $(ps aux | grep '[v]irtuoso-t' | awk '{print $2}')
   touch /.dba_pwd_set
-else 
-  virtuoso-t +wait &
 fi
 
-tail -f virtuoso.log
+virtuoso-t +wait +foreground
+
