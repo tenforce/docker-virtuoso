@@ -7,6 +7,7 @@ The Virtuoso is built from a specific commit SHA in https://github.com/openlink/
     docker run --name my-virtuoso \
         -p 8890:8890 -p 1111:1111 \
         -e DBA_PASSWORD=myDbaPassword \
+        -e SPARQL_UPDATE=true \
         -v /my/path/to/the/virtuoso/db:/var/lib/virtuoso/db \
         -d tenforce/virtuoso
 
@@ -14,7 +15,9 @@ The Virtuoso database folder is mounted in `/var/lib/virtuoso/db`.
 
 The Docker image exposes port 8890 and 1111.
 
-The `dba` password can be set at container start up via the `DBA_PASSWORD` environment variable.
+The `dba` password can be set at container start up via the `DBA_PASSWORD` environment variable. If not set, the default `dba` password will be used.
+
+The `SPARQL_UPDATE` permission on the SPARQL endpoint can be granted by setting the `SPARQL_UPDATE` environment variable to `true`.
 
 ## Dumping your Virtuoso data as quads
 Enter the Virtuoso docker, open ISQL and execute the `dump_nquads` procedure. The dump will be available in `/my/path/to/the/virtuoso/db/dumps`.
