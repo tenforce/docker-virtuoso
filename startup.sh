@@ -3,7 +3,11 @@ cd /var/lib/virtuoso/db
 
 mkdir -p dumps
 
-mv /virtuoso.ini . 2>/dev/null
+if [ ! -f ./virtuoso.ini ];
+then
+  mv /virtuoso.ini . 2>/dev/null
+fi
+
 chmod +x /clean-logs.sh
 mv /clean-logs.sh . 2>/dev/null
 
