@@ -8,6 +8,7 @@ The Virtuoso is built from a specific commit SHA in https://github.com/openlink/
         -p 8890:8890 -p 1111:1111 \
         -e DBA_PASSWORD=myDbaPassword \
         -e SPARQL_UPDATE=true \
+        -e DEFAULT_GRAPH=http://localhost:8890/DAV \
         -v /my/path/to/the/virtuoso/db:/var/lib/virtuoso/db \
         -d tenforce/virtuoso
 
@@ -41,4 +42,7 @@ Validate the `ll_state` of the load. If `ll_state` is 2, the load completed.
     select * from DB.DBA.load_list;
 
 For more information, see http://virtuoso.openlinksw.com/dataspace/doc/dav/wiki/Main/VirtBulkRDFLoader
+
+By default, any data that is put in the toLoad directory of the virtuoso database is loaded into virtuoso, with the default graph set to the DEFAULT_GRAPH environment variable, which defaults tohttp://localhost:8890/DAV.
+
 
