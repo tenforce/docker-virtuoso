@@ -30,6 +30,7 @@ Enter the Virtuoso docker, open ISQL and execute the `dump_nquads` procedure. Th
 For more information, see http://virtuoso.openlinksw.com/dataspace/doc/dav/wiki/Main/VirtRDFDumpNQuad
 
 ## Loading quads in Virtuoso
+### Manually
 Make the quad `.nq` files available in `/my/path/to/the/virtuoso/db/dumps`. The quad files might be compressed. Enter the Virtuoso docker, open ISQL, register and run the load.
 
     docker exec -it my-virtuoso bash
@@ -43,6 +44,7 @@ Validate the `ll_state` of the load. If `ll_state` is 2, the load completed.
 
 For more information, see http://virtuoso.openlinksw.com/dataspace/doc/dav/wiki/Main/VirtBulkRDFLoader
 
-By default, any data that is put in the toLoad directory of the virtuoso database is loaded into virtuoso, with the default graph set to the DEFAULT_GRAPH environment variable, which defaults tohttp://localhost:8890/DAV.
+### Automatically
+By default, any data that is put in the `toLoad` directory in the Virtuoso database folder (`/my/path/to/the/virtuoso/db/toLoad`) is automatically loaded into Virtuoso on the first startup of the docker container. The default graph is set by the DEFAULT_GRAPH environment variable, which defaults to `http://localhost:8890/DAV`.
 
 
