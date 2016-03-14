@@ -1,5 +1,7 @@
 FROM ubuntu:14.04
 
+MAINTAINER Erika Pauwels <erika.pauwels@tenforce.com>
+
 # Install Virtuoso prerequisites
 RUN apt-get update \
         && apt-get install -y build-essential debhelper autotools-dev autoconf automake unzip wget net-tools git libtool flex bison gperf gawk m4 libssl-dev libreadline-dev libreadline-dev openssl
