@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /var/lib/virtuoso/db
+cd /data
 
 mkdir -p dumps
 
