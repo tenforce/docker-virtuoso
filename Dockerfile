@@ -35,11 +35,11 @@ ADD dump_nquads_procedure.sql /dump_nquads_procedure.sql
 ADD clean-logs.sh /clean-logs.sh
 
 # Add startup script
-ADD startup.sh /startup.sh
+ADD virtuoso.sh /virtuoso.sh
 
 VOLUME /data
 WORKDIR /data
 EXPOSE 8890
 EXPOSE 1111
 
-CMD ["/bin/bash", "/startup.sh"]
+CMD ["/bin/bash", "/virtuoso.sh"]
