@@ -18,6 +18,7 @@ RUN git clone https://github.com/openlink/virtuoso-opensource.git \
         && CFLAGS="-O2 -m64" && export CFLAGS && ./configure --disable-bpel-vad --enable-conductor-vad --disable-dbpedia-vad --disable-demo-vad --disable-isparql-vad --disable-ods-vad --disable-sparqldemo-vad --disable-syncml-vad --disable-tutorial-vad --with-readline --program-transform-name="s/isql/isql-v/" \
         && make && make install \
         && ln -s /usr/local/virtuoso-opensource/var/lib/virtuoso/ /var/lib/virtuoso \
+	&& ln -s /var/lib/virtuoso/db /data \
         && cd .. \
         && rm -r /virtuoso-opensource
 
@@ -36,7 +37,8 @@ ADD clean-logs.sh /clean-logs.sh
 # Add startup script
 ADD startup.sh /startup.sh
 
-WORKDIR /var/lib/virtuoso/db
+VOLUME /data
+WORKDIR /data
 EXPOSE 8890
 EXPOSE 1111
 

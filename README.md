@@ -9,10 +9,10 @@ The Virtuoso is built from a specific commit SHA in https://github.com/openlink/
         -e DBA_PASSWORD=myDbaPassword \
         -e SPARQL_UPDATE=true \
         -e DEFAULT_GRAPH=http://localhost:8890/DAV \
-        -v /my/path/to/the/virtuoso/db:/var/lib/virtuoso/db \
+        -v /my/path/to/the/virtuoso/db:/data \
         -d tenforce/virtuoso
 
-The Virtuoso database folder is mounted in `/var/lib/virtuoso/db`.
+The Virtuoso database folder is mounted in `/data`.
 
 The Docker image exposes port 8890 and 1111.
 
@@ -45,6 +45,6 @@ Validate the `ll_state` of the load. If `ll_state` is 2, the load completed.
 For more information, see http://virtuoso.openlinksw.com/dataspace/doc/dav/wiki/Main/VirtBulkRDFLoader
 
 ### Automatically
-By default, any data that is put in the `toLoad` directory in the Virtuoso database folder (`/my/path/to/the/virtuoso/db/toLoad`) is automatically loaded into Virtuoso on the first startup of the docker container. The default graph is set by the DEFAULT_GRAPH environment variable, which defaults to `http://localhost:8890/DAV`.
+By default, any data that is put in the `toLoad` directory in the Virtuoso database folder (`/my/path/to/the/virtuoso/db/toLoad`) is automatically loaded into Virtuoso on the first startup of the Docker container. The default graph is set by the DEFAULT_GRAPH environment variable, which defaults to `http://localhost:8890/DAV`.
 
 
