@@ -6,8 +6,8 @@ MAINTAINER Erika Pauwels <erika.pauwels@tenforce.com>
 RUN apt-get update \
         && apt-get install -y build-essential debhelper autotools-dev autoconf automake unzip wget net-tools git libtool flex bison gperf gawk m4 libssl-dev libreadline-dev libreadline-dev openssl
 
-# Set Virtuoso commit SHA to Virtuoso 7.2 release (14/02/2015)
-ENV VIRTUOSO_COMMIT a5e1f5bb055761c389ea50f8f8849b73e5241018 
+# Set Virtuoso commit SHA to Virtuoso 7.2.2 release (09/12/2015)
+ENV VIRTUOSO_COMMIT c40570717342a059311a28d7e66e2ac258304720
 
 # Get Virtuoso source code from GitHub and checkout specific commit
 # Make and install Virtuoso (by default in /usr/local/virtuoso-opensource)
