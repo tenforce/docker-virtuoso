@@ -3,6 +3,15 @@ Docker for hosting Virtuoso.
 
 The Virtuoso is built from a specific commit SHA in https://github.com/openlink/virtuoso-opensource.
 
+<<<<<<< HEAD
+=======
+The Docker image tags include the Virtuoso version installed in the container. The following [versions are currently available](https://hub.docker.com/r/tenforce/virtuoso/tags/):
+- 1.0.0-virtuoso7.2.4
+- 1.0.0-virtuoso7.2.2
+- 1.0.0-virtuoso7.2.1
+- 1.0.0-virtuoso7.2.0
+
+>>>>>>> 0583545... Update README.md
 ## Running your Virtuoso
     docker run --name my-virtuoso \
         -p 8890:8890 -p 1111:1111 \
