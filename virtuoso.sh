@@ -36,9 +36,9 @@ then
   touch /.dba_pwd_set
 fi
 
-if [ ! -f "/.data_loaded" ];
+if [ ! -f "/.data_loaded" ] && [ -d "toLoad" ] ;
 then
-    echo "starting data loading"
+    echo "Start data loading from toLoad folder"
     pwd="dba"
     graph="http://localhost:8890/DAV"
 
@@ -53,7 +53,6 @@ then
     kill $(ps aux | grep '[v]irtuoso-t' | awk '{print $2}')
     touch /.data_loaded
 fi
-
 
 virtuoso-t +wait +foreground
 
