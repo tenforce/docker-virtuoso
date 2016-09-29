@@ -6,10 +6,10 @@ The Virtuoso is built from a specific commit SHA in https://github.com/openlink/
 <<<<<<< HEAD
 =======
 The Docker image tags include the Virtuoso version installed in the container. The following [versions are currently available](https://hub.docker.com/r/tenforce/virtuoso/tags/):
-- 1.0.0-virtuoso7.2.4
-- 1.0.0-virtuoso7.2.2
-- 1.0.0-virtuoso7.2.1
-- 1.0.0-virtuoso7.2.0
+- 1.1.0-virtuoso7.2.4
+- 1.1.0-virtuoso7.2.2
+- 1.1.0-virtuoso7.2.1
+- 1.1.0-virtuoso7.2.0
 
 >>>>>>> 0583545... Update README.md
 ## Running your Virtuoso
@@ -25,9 +25,15 @@ The Virtuoso database folder is mounted in `/data`.
 
 The Docker image exposes port 8890 and 1111.
 
+## Configuration
+### dba password
 The `dba` password can be set at container start up via the `DBA_PASSWORD` environment variable. If not set, the default `dba` password will be used.
 
+### SPARQL update permission
 The `SPARQL_UPDATE` permission on the SPARQL endpoint can be granted by setting the `SPARQL_UPDATE` environment variable to `true`.
+
+### .ini configuration
+All properties defined in `virtuoso.ini` can be configured via the environment variables. The environment variable should be prefixed with `VIRT_` and have a format like `VIRT_$SECTION_$KEY`. `$SECTION` and `$KEY` are case sensitive. They should be CamelCased as in `virtuoso.ini`. E.g. property `ErrorLogFile` in the `Database` section should be configured as `VIRT_Database_ErrorLogFile=error.log`. 
 
 ## Dumping your Virtuoso data as quads
 Enter the Virtuoso docker, open ISQL and execute the `dump_nquads` procedure. The dump will be available in `/my/path/to/the/virtuoso/db/dumps`.
@@ -55,5 +61,3 @@ For more information, see http://virtuoso.openlinksw.com/dataspace/doc/dav/wiki/
 
 ### Automatically
 By default, any data that is put in the `toLoad` directory in the Virtuoso database folder (`/my/path/to/the/virtuoso/db/toLoad`) is automatically loaded into Virtuoso on the first startup of the Docker container. The default graph is set by the DEFAULT_GRAPH environment variable, which defaults to `http://localhost:8890/DAV`.
-
-

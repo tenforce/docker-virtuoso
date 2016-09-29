@@ -11,6 +11,21 @@ fi
 chmod +x /clean-logs.sh
 mv /clean-logs.sh . 2>/dev/null
 
+if [ ! -f "/.config_set" ];
+then
+  echo "Converting environment variables to ini file"
+  printenv | grep -P "^VIRT_" | while read setting
+  do
+    section=`echo "$setting" | grep -o -P "^VIRT_[^_]+" | sed 's/^.\{5\}//g'`
+    key=`echo "$setting" | grep -o -P "_[^_]+=" | sed 's/[_=]//g'`
+    value=`echo "$setting" | grep -o -P "=.*$" | sed 's/^=//g'`
+    echo "Registering $section[$key] to be $value"
+    crudini --set virtuoso.ini $section $key $value
+  done
+  touch /.config_set
+  echo "Finished converting environment variables to ini file"
+fi
+
 if [ ! -f "/.dba_pwd_set" ];
 then
   touch /sql-query.sql

@@ -2,9 +2,10 @@ FROM ubuntu:14.04
 
 MAINTAINER Erika Pauwels <erika.pauwels@tenforce.com>
 
-# Install Virtuoso prerequisites
+# Install Virtuoso prerequisites and crudini Python lib
 RUN apt-get update \
-        && apt-get install -y build-essential debhelper autotools-dev autoconf automake unzip wget net-tools git libtool flex bison gperf gawk m4 libssl-dev libreadline-dev libreadline-dev openssl
+        && apt-get install -y build-essential debhelper autotools-dev autoconf automake unzip wget net-tools git libtool flex bison gperf gawk m4 libssl-dev libreadline-dev libreadline-dev openssl python-pip \
+        && pip install crudini
 
 # Set Virtuoso commit SHA to Virtuoso 7.2 release (14/02/2015)
 ENV VIRTUOSO_COMMIT a5e1f5bb055761c389ea50f8f8849b73e5241018 
