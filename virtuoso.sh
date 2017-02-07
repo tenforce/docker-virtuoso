@@ -54,5 +54,4 @@ then
     echo `date +%Y-%m-%dT%H:%M:%S%:z` > .data_loaded
 fi
 
-virtuoso-t +wait +foreground
-
+exec virtuoso-t +wait +foreground
