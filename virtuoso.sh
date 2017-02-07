@@ -54,5 +54,4 @@ then
     touch .data_loaded
 fi
 
-virtuoso-t +wait +foreground
-
+exec virtuoso-t +wait +foreground
