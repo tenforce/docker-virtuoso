@@ -11,9 +11,7 @@ fi
 chmod +x /clean-logs.sh
 mv /clean-logs.sh . 2>/dev/null
 
-# NOTE: flags file are being checked at two locations for compatibility reason
-
-if [ ! -f "/.config_set" -a ! -f ".config_set" ];
+if [ ! -f ".config_set" ];
 then
   echo "Converting environment variables to ini file"
   printenv | grep -P "^VIRT_" | while read setting
@@ -28,7 +26,7 @@ then
   echo "Finished converting environment variables to ini file"
 fi
 
-if [ ! -f "/.dba_pwd_set" -a ! -f ".dba_pwd_set" ];
+if [ ! -f ".dba_pwd_set" ];
 then
   touch /sql-query.sql
   if [ "$DBA_PASSWORD" ]; then echo "user_set_password('dba', '$DBA_PASSWORD');" >> /sql-query.sql ; fi
@@ -38,7 +36,7 @@ then
   touch .dba_pwd_set
 fi
 
-if [ ! -f "/.data_loaded" -a ! -f ".data_loaded" -a -d "toLoad" ] ;
+if [ ! -f ".data_loaded" -a -d "toLoad" ] ;
 then
     echo "Start data loading from toLoad folder"
     pwd="dba"
