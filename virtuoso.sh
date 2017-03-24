@@ -22,7 +22,7 @@ then
     echo "Registering $section[$key] to be $value"
     crudini --set virtuoso.ini $section $key $value
   done
-  touch .config_set
+  echo `date +%Y-%m%-dT%H:%M:%S%:z` >  .config_set
   echo "Finished converting environment variables to ini file"
 fi
 
@@ -33,7 +33,7 @@ then
   if [ "$SPARQL_UPDATE" = "true" ]; then echo "GRANT SPARQL_UPDATE to \"SPARQL\";" >> /sql-query.sql ; fi
   virtuoso-t +wait && isql-v -U dba -P dba < /dump_nquads_procedure.sql && isql-v -U dba -P dba < /sql-query.sql
   kill $(ps aux | grep '[v]irtuoso-t' | awk '{print $2}')
-  touch .dba_pwd_set
+  echo `date +%Y-%m-%dT%H:%M:%S%:z` >  .dba_pwd_set
 fi
 
 if [ ! -f ".data_loaded" -a -d "toLoad" ] ;
@@ -51,7 +51,7 @@ then
     echo "$(cat /load_data.sql)"
     virtuoso-t +wait && isql-v -U dba -P "$pwd" < /load_data.sql
     kill $(ps aux | grep '[v]irtuoso-t' | awk '{print $2}')
-    touch .data_loaded
+    echo `date +%Y-%m-%dT%H:%M:%S%:z` > .data_loaded
 fi
 
 virtuoso-t +wait +foreground
