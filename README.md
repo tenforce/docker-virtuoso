@@ -22,6 +22,21 @@ The Virtuoso database folder is mounted in `/data`.
 
 The Docker image exposes port 8890 and 1111.
 
+## Docker compose
+The image can also be configured and used via docker-compose.
+
+```
+db:
+  image: tenforce/virtuoso:1.1.1-virtuoso7.2.2
+  environment:
+    SPARQL_UPDATE: "true"
+    DEFAULT_GRAPH: "http://www.example.com/my-graph"
+  volumes:
+    - ./data/virtuoso:/data
+  ports:
+    - "8890:8890"
+```
+
 ## Configuration
 ### dba password
 The `dba` password can be set at container start up via the `DBA_PASSWORD` environment variable. If not set, the default `dba` password will be used.
