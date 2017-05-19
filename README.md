@@ -4,10 +4,10 @@ Docker for hosting Virtuoso.
 The Virtuoso is built from a specific commit SHA in https://github.com/openlink/virtuoso-opensource.
 
 The Docker image tags include the Virtuoso version installed in the container. The following [versions are currently available](https://hub.docker.com/r/tenforce/virtuoso/tags/):
-- 1.1.1-virtuoso7.2.4
-- 1.1.1-virtuoso7.2.2
-- 1.1.1-virtuoso7.2.1
-- 1.1.1-virtuoso7.2.0
+- 1.2.0-virtuoso7.2.4
+- 1.2.0-virtuoso7.2.2
+- 1.2.0-virtuoso7.2.1
+- 1.2.0-virtuoso7.2.0
 
 ## Running your Virtuoso
     docker run --name my-virtuoso \
@@ -27,7 +27,7 @@ The image can also be configured and used via docker-compose.
 
 ```
 db:
-  image: tenforce/virtuoso:1.1.1-virtuoso7.2.2
+  image: tenforce/virtuoso:1.2.0-virtuoso7.2.2
   environment:
     SPARQL_UPDATE: "true"
     DEFAULT_GRAPH: "http://www.example.com/my-graph"
