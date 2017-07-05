@@ -17,7 +17,7 @@ RUN git clone https://github.com/openlink/virtuoso-opensource.git \
         && CFLAGS="-O2 -m64" && export CFLAGS && ./configure --disable-bpel-vad --enable-conductor-vad --enable-fct-vad --disable-dbpedia-vad --disable-demo-vad --disable-isparql-vad --disable-ods-vad --disable-sparqldemo-vad --disable-syncml-vad --disable-tutorial-vad --with-readline --program-transform-name="s/isql/isql-v/" \
         && make && make install \
         && ln -s /usr/local/virtuoso-opensource/var/lib/virtuoso/ /var/lib/virtuoso \
-	&& ln -s /var/lib/virtuoso/db /data \
+	      && ln -s /var/lib/virtuoso/db /data \
         && cd .. \
         && rm -r /virtuoso-opensource
 
@@ -25,16 +25,16 @@ RUN git clone https://github.com/openlink/virtuoso-opensource.git \
 ENV PATH /usr/local/virtuoso-opensource/bin/:$PATH
 
 # Add Virtuoso config
-ADD virtuoso.ini /virtuoso.ini
+COPY virtuoso.ini /virtuoso.ini
 
 # Add dump_nquads_procedure
-ADD dump_nquads_procedure.sql /dump_nquads_procedure.sql
+COPY dump_nquads_procedure.sql /dump_nquads_procedure.sql
 
 # Add Virtuoso log cleaning script
-ADD clean-logs.sh /clean-logs.sh
+COPY clean-logs.sh /clean-logs.sh
 
 # Add startup script
-ADD virtuoso.sh /virtuoso.sh
+COPY virtuoso.sh /virtuoso.sh
 
 VOLUME /data
 WORKDIR /data
