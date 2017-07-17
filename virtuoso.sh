@@ -50,7 +50,7 @@ then
     echo "WAIT_FOR_CHILDREN; " >> /load_data.sql
     echo "$(cat /load_data.sql)"
     virtuoso-t +wait && isql-v -U dba -P "$pwd" < /load_data.sql
-    kill "$(ps aux | grep '[v]irtuoso-t' | awk '{print $2}')"
+    kill $(ps aux | grep '[v]irtuoso-t' | awk '{print $2}')
     echo "`date +%Y-%m-%dT%H:%M:%S%:z`" > .data_loaded
 fi
 
