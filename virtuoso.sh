@@ -59,6 +59,6 @@ then
 fi
 
 # NOTE: put back Virtuoso's server port to 8890 before starting up
-crudini --set virtuoso.ini HTTPServer ServerPort 8890
+crudini --set virtuoso.ini HTTPServer ServerPort ${VIRT_HTTPServer_ServerPort:-8890}
 
 exec virtuoso-t +foreground
