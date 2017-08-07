@@ -1,4 +1,7 @@
 #!/bin/bash
+SETTINGS_DIR=/settings
+mkdir -p $SETTINGS_DIR
+
 cd /data
 
 mkdir -p dumps
@@ -16,7 +19,7 @@ original_port=`crudini --get virtuoso.ini HTTPServer ServerPort`
 #		the server
 crudini --set virtuoso.ini HTTPServer ServerPort 27015
 
-if [ ! -f ".config_set" ];
+if [ ! -f "$SETTINGS_DIR/.config_set" ];
 then
   echo "Converting environment variables to ini file"
   printenv | grep -P "^VIRT_" | while read setting
@@ -27,7 +30,7 @@ then
     echo "Registering $section[$key] to be $value"
     crudini --set virtuoso.ini $section $key "$value"
   done
-  echo "`date +%Y-%m%-dT%H:%M:%S%:z`" >  .config_set
+  echo "`date +%Y-%m%-dT%H:%M:%S%:z`" >  $SETTINGS_DIR/.config_set
   echo "Finished converting environment variables to ini file"
 fi
 
