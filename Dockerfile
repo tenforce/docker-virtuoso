@@ -23,6 +23,8 @@ RUN git clone https://github.com/openlink/virtuoso-opensource.git \
         && cd .. \
         && rm -r /virtuoso-opensource
 
+HEALTHCHECK --start-period=55s CMD port=`crudini --get virtuoso.ini HTTPServer ServerPort` && wget -q -O - http://localhost:${VIRT_HTTPServer_ServerPort:-$port}/sparql'?query=ASK%20%7B%7D' || exit 1
+
 # Add Virtuoso bin to the PATH
 ENV PATH /usr/local/virtuoso-opensource/bin/:$PATH
 
