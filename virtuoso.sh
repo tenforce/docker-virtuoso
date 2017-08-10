@@ -14,11 +14,6 @@ fi
 chmod +x /clean-logs.sh
 mv /clean-logs.sh . 2>/dev/null
 
-original_port=`crudini --get virtuoso.ini HTTPServer ServerPort`
-# NOTE: prevents virtuoso to expose on port 8890 before we actually run
-#		the server
-crudini --set virtuoso.ini HTTPServer ServerPort 27015
-
 if [ ! -f "$SETTINGS_DIR/.config_set" ];
 then
   echo "Converting environment variables to ini file"
@@ -62,7 +57,4 @@ then
     echo "`date +%Y-%m-%dT%H:%M:%S%:z`" > .data_loaded
 fi
 
-# NOTE: put back Virtuoso's server port to 8890 before starting up
-crudini --set virtuoso.ini HTTPServer ServerPort ${VIRT_HTTPServer_ServerPort:-$original_port}
-
-exec virtuoso-t +foreground
+exec virtuoso-t +wait +foreground
