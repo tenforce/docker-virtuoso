@@ -1,4 +1,4 @@
-#!/bin/bash
+ #!/bin/bash
 SETTINGS_DIR=/settings
 mkdir -p $SETTINGS_DIR
 
@@ -13,6 +13,11 @@ fi
 
 chmod +x /clean-logs.sh
 mv /clean-logs.sh . 2>/dev/null
+
+original_port=`crudini --get virtuoso.ini HTTPServer ServerPort`
+# NOTE: prevents virtuoso to expose on port 8890 before we actually run
+#		the server
+crudini --set virtuoso.ini HTTPServer ServerPort 27015
 
 if [ ! -f "$SETTINGS_DIR/.config_set" ];
 then
@@ -56,5 +61,7 @@ then
     kill $(ps aux | grep '[v]irtuoso-t' | awk '{print $2}')
     echo "`date +%Y-%m-%dT%H:%M:%S%:z`" > .data_loaded
 fi
+
+crudini --set virtuoso.ini HTTPServer ServerPort ${VIRT_HTTPServer_ServerPort:-$original_port}
 
 exec virtuoso-t +wait +foreground
