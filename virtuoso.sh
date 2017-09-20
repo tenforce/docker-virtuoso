@@ -1,4 +1,4 @@
- #!/bin/bash
+#!/bin/bash
 SETTINGS_DIR=/settings
 mkdir -p $SETTINGS_DIR
 
