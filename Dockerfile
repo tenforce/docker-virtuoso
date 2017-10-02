@@ -5,8 +5,8 @@ RUN apt-get update \
         && apt-get install -y build-essential debhelper autotools-dev autoconf automake unzip wget net-tools git libtool flex bison gperf gawk m4 libssl-dev libreadline-dev libreadline-dev openssl python-pip \
         && pip install crudini
 
-# Set Virtuoso commit SHA to Virtuoso 7.2.4 release (25/04/2016)
-ENV VIRTUOSO_COMMIT 96055f6a70a92c3098a7e786592f4d8ba8aae214
+# Set Virtuoso commit SHA to Virtuoso 7.2.2 release (2015/12/09)
+ENV VIRTUOSO_COMMIT 359f26c55b98669e08fcaa9745e017759d276312
 
 # Get Virtuoso source code from GitHub and checkout specific commit
 # Make and install Virtuoso (by default in /usr/local/virtuoso-opensource)
