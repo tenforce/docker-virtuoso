@@ -73,3 +73,9 @@ For more information, see http://virtuoso.openlinksw.com/dataspace/doc/dav/wiki/
 
 ### Automatically
 By default, any data that is put in the `toLoad` directory in the Virtuoso database folder (`/my/path/to/the/virtuoso/db/toLoad`) is automatically loaded into Virtuoso on the first startup of the Docker container. The default graph is set by the DEFAULT_GRAPH environment variable, which defaults to `http://localhost:8890/DAV`.
+
+## Contributing
+
+Contributions to this repository are welcome, please create a pull request on the master branch.
+
+New features will be tested on tenforce/virtuoso:latest first. Once the image is verified, version branches will be rebased on master.
