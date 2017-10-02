@@ -1,6 +1,4 @@
-FROM ubuntu:14.04
-
-MAINTAINER Erika Pauwels <erika.pauwels@tenforce.com>
+FROM ubuntu:16.04
 
 # Install Virtuoso prerequisites and crudini Python lib
 RUN apt-get update \
@@ -27,16 +25,16 @@ RUN git clone https://github.com/openlink/virtuoso-opensource.git \
 ENV PATH /usr/local/virtuoso-opensource/bin/:$PATH
 
 # Add Virtuoso config
-ADD virtuoso.ini /virtuoso.ini
+COPY virtuoso.ini /virtuoso.ini
 
 # Add dump_nquads_procedure
-ADD dump_nquads_procedure.sql /dump_nquads_procedure.sql
+COPY dump_nquads_procedure.sql /dump_nquads_procedure.sql
 
 # Add Virtuoso log cleaning script
-ADD clean-logs.sh /clean-logs.sh
+COPY clean-logs.sh /clean-logs.sh
 
 # Add startup script
-ADD virtuoso.sh /virtuoso.sh
+COPY virtuoso.sh /virtuoso.sh
 
 VOLUME /data
 WORKDIR /data
