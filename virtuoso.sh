@@ -25,7 +25,7 @@ then
   printenv | grep -P "^VIRT_" | while read setting
   do
     section=`echo "$setting" | grep -o -P "^VIRT_[^_]+" | sed 's/^.\{5\}//g'`
-    key=`echo "$setting" | grep -o -P "_[^_]+=" | sed 's/[_=]//g'`
+    key=`echo "$setting" | sed -E 's/^VIRT_[^_]+_(.*)=.*$/\1/g'`
     value=`echo "$setting" | grep -o -P "=.*$" | sed 's/^=//g'`
     echo "Registering $section[$key] to be $value"
     crudini --set virtuoso.ini $section $key "$value"
