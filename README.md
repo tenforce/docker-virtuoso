@@ -4,10 +4,10 @@ Docker for hosting Virtuoso.
 The Virtuoso is built from a specific commit SHA in https://github.com/openlink/virtuoso-opensource.
 
 The Docker image tags include the Virtuoso version installed in the container. The following [versions are currently available](https://hub.docker.com/r/tenforce/virtuoso/tags/):
-- 1.2.0-virtuoso7.2.4
-- 1.2.0-virtuoso7.2.2
-- 1.2.0-virtuoso7.2.1
-- 1.2.0-virtuoso7.2.0
+- 1.3.1-virtuoso7.2.4 (or virtuoso7.2.4 for latest)
+- 1.3.1-virtuoso7.2.2 (or virtuoso7.2.2 for latest)
+- 1.3.1-virtuoso7.2.1 (or virtuoso7.2.1 for latest)
+- 1.3.1-virtuoso7.2.0 (or virtuoso7.2.0 for latest)
 
 ## Running your Virtuoso
     docker run --name my-virtuoso \
@@ -27,7 +27,7 @@ The image can also be configured and used via docker-compose.
 
 ```
 db:
-  image: tenforce/virtuoso:1.2.0-virtuoso7.2.2
+  image: tenforce/virtuoso:1.3.1-virtuoso7.2.2
   environment:
     SPARQL_UPDATE: "true"
     DEFAULT_GRAPH: "http://www.example.com/my-graph"
@@ -73,3 +73,9 @@ For more information, see http://virtuoso.openlinksw.com/dataspace/doc/dav/wiki/
 
 ### Automatically
 By default, any data that is put in the `toLoad` directory in the Virtuoso database folder (`/my/path/to/the/virtuoso/db/toLoad`) is automatically loaded into Virtuoso on the first startup of the Docker container. The default graph is set by the DEFAULT_GRAPH environment variable, which defaults to `http://localhost:8890/DAV`.
+
+## Contributing
+
+Contributions to this repository are welcome, please create a pull request on the master branch.
+
+New features will be tested on tenforce/virtuoso:latest first. Once the image is verified, version branches will be rebased on master.
