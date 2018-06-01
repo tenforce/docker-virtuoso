@@ -39,7 +39,6 @@ then
     echo "Start restoring a backup"
     cd backupToRestore
     virtuoso-t +restore-backup $BACKUP_PREFIX +configfile /data/virtuoso.ini
-    kill $(ps aux | grep '[v]irtuoso-t' | awk '{print $2}')
     echo "`date +%Y-%m-%dT%H:%M:%S%:z`" > .backup_restored
     cd /data
 fi
