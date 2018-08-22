@@ -9,6 +9,7 @@ The Docker image tags include the Virtuoso version installed in the container. T
 - 1.3.1-virtuoso7.2.1 (or virtuoso7.2.1 for latest)
 - 1.3.1-virtuoso7.2.0 (or virtuoso7.2.0 for latest)
 
+
 ## Running your Virtuoso
     docker run --name my-virtuoso \
         -p 8890:8890 -p 1111:1111 \
