@@ -64,4 +64,7 @@ fi
 
 crudini --set virtuoso.ini HTTPServer ServerPort ${VIRT_HTTPServer_ServerPort:-$original_port}
 
-exec virtuoso-t +wait +foreground
+# exec virtuoso-t +wait +foreground
+# virtuoso-t +wait +configfile /usr/local/virtuoso-opensource/var/lib/virtuoso/db/virtuoso.ini
+virtuoso-t +wait +configfile /virtuoso.ini
+
