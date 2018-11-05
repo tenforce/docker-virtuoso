@@ -34,6 +34,15 @@ then
   echo "Finished converting environment variables to ini file"
 fi
 
+if [ ! -f ".backup_restored" -a -d "backupToRestore" ] ;
+then
+    echo "Start restoring a backup"
+    cd backupToRestore
+    virtuoso-t +restore-backup $BACKUP_PREFIX +configfile /data/virtuoso.ini
+    echo "`date +%Y-%m-%dT%H:%M:%S%:z`" > .backup_restored
+    cd /data
+fi
+
 if [ ! -f ".dba_pwd_set" ];
 then
   touch /sql-query.sql
