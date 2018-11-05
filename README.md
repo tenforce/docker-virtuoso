@@ -46,7 +46,7 @@ The `dba` password can be set at container start up via the `DBA_PASSWORD` envir
 The `SPARQL_UPDATE` permission on the SPARQL endpoint can be granted by setting the `SPARQL_UPDATE` environment variable to `true`.
 
 ### .ini configuration
-All properties defined in `virtuoso.ini` can be configured via the environment variables. The environment variable should be prefixed with `VIRT_` and have a format like `VIRT_$SECTION_$KEY`. `$SECTION` and `$KEY` are case sensitive. They should be CamelCased as in `virtuoso.ini`. E.g. property `ErrorLogFile` in the `Database` section should be configured as `VIRT_Database_ErrorLogFile=error.log`. 
+All properties defined in `virtuoso.ini` can be configured via the environment variables. The environment variable should be prefixed with `VIRT_` and have a format like `VIRT_$SECTION_$KEY`. `$SECTION` and `$KEY` are case sensitive. They should be CamelCased as in `virtuoso.ini`. E.g. property `ErrorLogFile` in the `Database` section should be configured as `VIRT_Database_ErrorLogFile=error.log`.
 
 ## Dumping your Virtuoso data as quads
 Enter the Virtuoso docker, open ISQL and execute the `dump_nquads` procedure. The dump will be available in `/my/path/to/the/virtuoso/db/dumps`.
@@ -67,7 +67,7 @@ Make the quad `.nq` files available in `/my/path/to/the/virtuoso/db/dumps`. The 
     SQL> rdf_loader_run();
 
 Validate the `ll_state` of the load. If `ll_state` is 2, the load completed.
- 
+
     select * from DB.DBA.load_list;
 
 For more information, see http://virtuoso.openlinksw.com/dataspace/doc/dav/wiki/Main/VirtBulkRDFLoader
@@ -82,9 +82,9 @@ A virtuoso backup can be created by executing the appropriate commands via the I
 docker exec -i virtuoso_container mkdir -p backups
 docker exec -i virtuoso_container isql-v <<EOF
     exec('checkpoint');
-		backup_context_clear();
-		backup_online('backup_',30000,0,vector('backups'));
-		exit;
+    backup_context_clear();
+    backup_online('backup_',30000,0,vector('backups'));
+    exit;
 ```
 ## Restoring a backup
 To restore a backup, stop the running container and restore the database using a new container.
@@ -94,6 +94,20 @@ docker run --rm  -it -v path-to-your-database:/data tenforce/virtuoso virtuoso-t
 ```
 
 The new container will exit once the backup has been restored, you can then restart the original db container.
+
+It is also possible to restore a backup placed in /data/backups using a environment variable. Using this approach the backup is loaded automatically on startup and it is not required to run a separate container.
+
+```
+docker run --name my-virtuoso \
+            -p 8890:8890 \
+            -p 1111:1111 \
+            -e DBA_PASSWORD=dba \
+            -e SPARQL_UPDATE=true \
+            -e BACKUP_PREFIX=backup_ \_
+            -v path-to-your-database:/data \
+            -d tenforce/virtuoso
+```
+
 ## Contributing
 
 Contributions to this repository are welcome, please create a pull request on the master branch.
