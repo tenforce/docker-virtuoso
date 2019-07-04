@@ -7,13 +7,17 @@ ENV VIRTUOSO_COMMIT d0d4935edebcba6489b185e6c6c6c14c34d2eade
 RUN apt-get update \
         && apt-get install -y build-essential autotools-dev autoconf automake unzip wget net-tools libtool flex bison gperf gawk m4 libssl-dev libreadline-dev openssl crudini \
         # Workaround for #663
-        && apt-get install -y libssl1.0-dev \
-        && wget https://github.com/openlink/virtuoso-opensource/archive/${VIRTUOSO_COMMIT}.zip \
+        && apt-get install -y libssl1.0-dev 
+RUN apt-get install -y proj-bin libgeos-dev libgeos-3.6.2 libproj12 libproj-dev libgeos++-dev
+RUN cd /usr/include/ \
+    && ln -s geos_c.h geos.h
+
+RUN wget https://github.com/openlink/virtuoso-opensource/archive/${VIRTUOSO_COMMIT}.zip \
         && unzip ${VIRTUOSO_COMMIT}.zip \
         && rm ${VIRTUOSO_COMMIT}.zip \
         && cd virtuoso-opensource-${VIRTUOSO_COMMIT} \
         && ./autogen.sh \
-        && export CFLAGS="-O2 -m64" && ./configure --disable-bpel-vad --enable-conductor-vad --enable-fct-vad --disable-dbpedia-vad --disable-demo-vad --disable-isparql-vad --disable-ods-vad --disable-sparqldemo-vad --disable-syncml-vad --disable-tutorial-vad --with-readline --program-transform-name="s/isql/isql-v/" \
+        && export CFLAGS="-O2 -m64" && ./configure --disable-bpel-vad --enable-conductor-vad --enable-fct-vad --disable-dbpedia-vad --disable-demo-vad --disable-isparql-vad --disable-ods-vad --disable-sparqldemo-vad --disable-syncml-vad --disable-tutorial-vad --with-readline --program-transform-name="s/isql/isql-v/" --enable-proj4 --disable-geos --enable-shapefileio \
         && make && make install \
         && ln -s /usr/local/virtuoso-opensource/var/lib/virtuoso/ /var/lib/virtuoso \
         && ln -s /var/lib/virtuoso/db /data \
