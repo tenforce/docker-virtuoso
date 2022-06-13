@@ -65,7 +65,7 @@ then
 
     if [ "$DBA_PASSWORD" ]; then pwd="$DBA_PASSWORD" ; fi
     if [ "$DEFAULT_GRAPH" ]; then graph="$DEFAULT_GRAPH" ; fi
-    echo "ld_dir('toLoad', '*', '$graph');" >> /load_data.sql
+    echo "ld_dir_all('toLoad', '*', '$graph');" >> /load_data.sql
     echo "rdf_loader_run();" >> /load_data.sql
     echo "exec('checkpoint');" >> /load_data.sql
     echo "WAIT_FOR_CHILDREN; " >> /load_data.sql
