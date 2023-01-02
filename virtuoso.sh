@@ -34,10 +34,11 @@ then
   echo "Finished converting environment variables to ini file"
 fi
 
-if [ ! -f ".backup_restored" -a -d "backups" -a ! -z "$BACKUP_PREFIX" ] ;
+BACKUP_DIR=${BACKUP_DIR:-backups}
+if [ ! -f ".backup_restored" -a -d "$BACKUP_DIR" -a ! -z "$BACKUP_PREFIX" ] ;
 then
     echo "Start restoring a backup with prefix $BACKUP_PREFIX"
-    cd backups
+    cd $BACKUP_DIR
     virtuoso-t +restore-backup $BACKUP_PREFIX +configfile /data/virtuoso.ini
     if [ $? -eq 0 ]; then
         cd /data
